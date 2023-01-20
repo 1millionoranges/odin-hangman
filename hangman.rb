@@ -19,7 +19,6 @@ class GameState
     end
     def self.from_yaml(string)
         data = YAML.load string
-        p data
         self.new(data[:word_array], data[:guessed_letters], data[:wrong_guesses])
     end
 
@@ -73,6 +72,7 @@ if File.exists?(save_file_name)
         save_file = File.open(save_file_name, "r")
         game = GameState.from_yaml(save_file.read)
         save_file.close()
+        puts "Game successfuly loaded!"
     else
         
         game.new_game
@@ -91,6 +91,7 @@ while true do
         f = File.open(save_file_name, "w")
         f.print(game.to_yaml)
         f.close()
+        puts "Game successfully saved"
         break
     else
         new_letter = input[0].downcase
